@@ -1,12 +1,11 @@
 <script setup>
-
 import { RouterLink } from "vue-router";
 
 defineProps({
   title: String,
   image: String,
-  count: Number
-})
+  count: Number,
+});
 </script>
 
 <template>
