@@ -4,8 +4,8 @@ import { RouterLink } from "vue-router";
 
 <template>
   <div class="md:order-2">
-    <a
-      href="login.html"
+    <router-link
+      to="/login"
       class="
         px-8
         py-3
@@ -23,9 +23,9 @@ import { RouterLink } from "vue-router";
       "
     >
       Sign In
-    </a>
-    <a
-      href="register.html"
+    </router-link>
+    <RouterLink
+      to="/register"
       class="
         px-8
         py-3
@@ -41,6 +41,6 @@ import { RouterLink } from "vue-router";
       "
     >
       Sign Up
-    </a>
+    </RouterLink>
   </div>
 </template>
