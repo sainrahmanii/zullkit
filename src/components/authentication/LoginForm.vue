@@ -1,10 +1,29 @@
 <script setup>
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
-const form = ref({
-  'email': '',
-  'password': ''
-})
+import axios from 'axios';
+
+const form  = ref({
+  email: "",
+  password: "",
+});
+
+async function login() {
+  try {
+    const response = await axios.post(
+      "https://zullkit-backend.buildwithangga.id/api/login",
+      {
+        email: form.value.email,
+        password: form.value.password,
+      }
+    );
+    localStorage.setItem('access_token', response.data.data.access_token)
+    localStorage.setItem('token_type', response.data.data.token_type)
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 </script>
 
 <template>
@@ -38,6 +57,7 @@ const form = ref({
     <div class="mb-4">
       <label class="block mb-1" for="password">Password</label>
       <input
+        @keyup.enter="login"
         v-model="form.password"
         placeholder="Type your password"
         id="password"
@@ -63,6 +83,7 @@ const form = ref({
     </div>
     <div class="mt-6">
       <button
+        @click="login"
         type="button"
         class="
           inline-flex
