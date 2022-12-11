@@ -1,24 +1,24 @@
 <script setup>
-import ItemCard from "@/components/homepage/ItemsCard.vue";
+import ItemCard from "@/components/homepage/ItemCard.vue";
 import { ref } from "@vue/reactivity";
 
 const items = ref([
   {
     id: 1,
     title: "Mobile UI Kit",
-    subtitle: "Mobile Ui Kit",
+    description: "Mobile Ui Kit",
     image: "items-1.jpg",
   },
   {
     id: 2,
     title: "Online Doctor Consultation",
-    subtitle: "Website UI Kit",
+    description: "Website UI Kit",
     image: "items-2.jpg",
   },
   {
     id: 3,
     title: "Banking Crypto",
-    subtitle: "Mobile Ui Kit",
+    description: "Mobile Ui Kit",
     image: "items-3.jpg",
   },
 ]);
@@ -32,7 +32,7 @@ const items = ref([
         v-for="item in items"
         :key="item.id"
         :title="item.title"
-        :subtitle="item.subtitle"
+        :description="item.description"
         :image="item.image"
       />
     </div>

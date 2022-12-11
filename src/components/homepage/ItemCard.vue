@@ -3,7 +3,7 @@ import { RouterLink } from "vue-router";
 
 defineProps({
   title: String,
-  subtitle: String,
+  description: String,
   image: String,
 });
 </script>
@@ -11,7 +11,7 @@ defineProps({
 <template>
   <div class="w-full px-1 my-1 md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
     <div class="overflow-hidden border border-gray-200 rounded-xl">
-      <a href="details.html">
+      <RouterLink to="">
         <div class="m-4 overflow-hidden rounded-xl">
           <img
             :alt="title"
@@ -19,7 +19,7 @@ defineProps({
             :src="'/src/assets/img/' + image"
           />
         </div>
-      </a>
+      </RouterLink>
 
       <header class="px-4 mb-4 leading-tight">
         <h1 class="text-lg">
@@ -31,7 +31,7 @@ defineProps({
           </a>
         </h1>
         <span class="block text-sm font-light text-gray-500 no-underline">
-          {{ subtitle }}
+          {{ description }}
         </span>
       </header>
     </div>
