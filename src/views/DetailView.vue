@@ -100,6 +100,7 @@ onMounted(() => {
                   </li>
                 </ul>
               </div>
+
               <RouterLink
                 to="/pricing"
                 class="
@@ -122,6 +123,7 @@ onMounted(() => {
               >
                 Download Now
               </RouterLink>
+              
             </div>
           </div>
         </aside>

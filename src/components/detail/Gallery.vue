@@ -1,18 +1,24 @@
 <script setup>
 import { ref } from "vue";
+
 const props = defineProps({
   defaultImage: String,
   galleries: Array,
 });
+
 const thumbnail = ref(props.defaultImage);
+
 function changeImage(image) {
   this.thumbnail = image;
 }
 </script>
 
 <template>
-  <section>
-    <img :src="thumbnail" alt="" class="w-full mt-6 rounded-2xl" />
+  <section id="gallery">
+    <div v-if=" !thumbnail ">
+      <img :src="defaultImage" alt="" class="w-full mt-6 rounded-2xl mt-9" />
+    </div>
+    <img :src="thumbnail" alt="" class="w-full mt-6 rounded-2xl mt-9" />
     <div class="grid grid-cols-4 gap-4 mt-4">
       <template v-for="gallery in galleries" :key="gallery.id">
         <div
