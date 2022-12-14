@@ -1,10 +1,35 @@
 <script setup>
-import FeatureList from '../components/authentication/FeatureList.vue';
+import FeatureList from "../components/authentication/FeatureList.vue";
+import { RouterLink } from "vue-router";
+import axios from "axios";
+
+async function checkout(price) {
+  try {
+    const response = await axios.post(
+      "https://zullkit-backend.buildwithangga.id/api/checkout",
+      {
+        payment_total: price,
+        payment_status: "PENDING",
+      },
+      {
+        headers: {
+          Authorization:
+            localStorage.getItem("token_type") +
+            " " +
+            localStorage.getItem("access_token")
+        },
+      }
+    )
+    window.location.href = response.data.data.payment_url
+  } catch (error) {
+    console.error(error);
+  }
+}
 </script>
 
 <template>
-    <main>
-      <div class="relative overflow-hidden bg-white">
+  <main>
+    <div class="relative overflow-hidden bg-white">
       <div class="mx-auto">
         <div
           class="flex flex-col items-center w-full sm:justify-center sm:pt-0"
@@ -23,7 +48,8 @@ import FeatureList from '../components/authentication/FeatureList.vue';
               <div>
                 <div class="p-8 border rounded-3xl">
                   <h1 class="text-5xl font-semibold">
-                    IDR 2,000 <span class="text-xl font-light text-gray-500">/month</span>
+                    IDR 2,000
+                    <span class="text-xl font-light text-gray-500">/month</span>
                   </h1>
                   <h2 class="text-lg font-semibold mt-7">Basic Plan</h2>
                   <p class="mb-6 text-gray-500">Suitable for new team</p>
@@ -35,7 +61,6 @@ import FeatureList from '../components/authentication/FeatureList.vue';
                         alt=""
                       />
                       Customizable layers
-                      
                     </li>
                     <li class="mb-3">
                       <img
@@ -44,7 +69,6 @@ import FeatureList from '../components/authentication/FeatureList.vue';
                         alt=""
                       />
                       Official documentation
-                      
                     </li>
                     <li class="mb-3">
                       <img
@@ -53,7 +77,6 @@ import FeatureList from '../components/authentication/FeatureList.vue';
                         alt=""
                       />
                       SVG icons
-                      
                     </li>
                     <li class="mb-3">
                       <img
@@ -62,7 +85,6 @@ import FeatureList from '../components/authentication/FeatureList.vue';
                         alt=""
                       />
                       SVG illustrations
-                      
                     </li>
                     <li class="mb-3">
                       <img
@@ -71,21 +93,37 @@ import FeatureList from '../components/authentication/FeatureList.vue';
                         alt=""
                       />
                       Pre-built design screen
-                      
                     </li>
                   </ul>
-                  <RouterLink
-                  to="/success"
-                  class="inline-flex items-center justify-center w-full px-8 py-3 text-base font-medium text-black bg-gray-200 border border-transparent rounded-full hover:bg-gray-300 md:py-2 md:text-md md:px-10 hover:shadow"
-                >
-                  Checkout Now
-                </RouterLink>
+                  <button
+                    @click="checkout(2000)"
+                    class="
+                      inline-flex
+                      items-center
+                      justify-center
+                      w-full
+                      px-8
+                      py-3
+                      text-base
+                      font-medium
+                      text-black
+                      bg-gray-200
+                      border border-transparent
+                      rounded-full
+                      hover:bg-gray-300
+                      md:py-2 md:text-md md:px-10
+                      hover:shadow
+                    "
+                  >
+                    Checkout Now
+                  </button>
                 </div>
               </div>
               <div>
                 <div class="p-8 border rounded-3xl">
                   <h1 class="text-5xl font-semibold">
-                    IDR 9,000 <span class="text-xl font-light text-gray-500">/month</span>
+                    IDR 9,000
+                    <span class="text-xl font-light text-gray-500">/month</span>
                   </h1>
                   <h2 class="text-lg font-semibold mt-7">Gold Plan</h2>
                   <p class="mb-6 text-gray-500">Suitable for big company</p>
@@ -97,7 +135,6 @@ import FeatureList from '../components/authentication/FeatureList.vue';
                         alt=""
                       />
                       Customizable layers
-                      
                     </li>
                     <li class="mb-3">
                       <img
@@ -106,7 +143,6 @@ import FeatureList from '../components/authentication/FeatureList.vue';
                         alt=""
                       />
                       Official documentation
-                      
                     </li>
                     <li class="mb-3">
                       <img
@@ -115,7 +151,6 @@ import FeatureList from '../components/authentication/FeatureList.vue';
                         alt=""
                       />
                       SVG icons
-                      
                     </li>
                     <li class="mb-3">
                       <img
@@ -124,7 +159,6 @@ import FeatureList from '../components/authentication/FeatureList.vue';
                         alt=""
                       />
                       SVG illustrations
-                      
                     </li>
                     <li class="mb-3">
                       <img
@@ -133,7 +167,6 @@ import FeatureList from '../components/authentication/FeatureList.vue';
                         alt=""
                       />
                       Pre-built design screen
-                      
                     </li>
                     <li class="mb-3">
                       <img
@@ -142,7 +175,6 @@ import FeatureList from '../components/authentication/FeatureList.vue';
                         alt=""
                       />
                       Coded template
-                      
                     </li>
                     <li class="mb-3">
                       <img
@@ -151,7 +183,6 @@ import FeatureList from '../components/authentication/FeatureList.vue';
                         alt=""
                       />
                       Support 24/7
-                      
                     </li>
                     <li class="mb-3">
                       <img
@@ -160,7 +191,6 @@ import FeatureList from '../components/authentication/FeatureList.vue';
                         alt=""
                       />
                       Private designer group
-                      
                     </li>
                     <li class="mb-3">
                       <img
@@ -169,15 +199,30 @@ import FeatureList from '../components/authentication/FeatureList.vue';
                         alt=""
                       />
                       Unlock cloning app
-                      
                     </li>
                   </ul>
-                  <RouterLink
-                  to="/success"
-                  class="inline-flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-full hover:bg-indigo-700 md:py-2 md:text-md md:px-10 hover:shadow"
-                >
-                  Checkout Now
-                </RouterLink>
+                  <button
+                    @click="checkout(9000)"
+                    class="
+                      inline-flex
+                      items-center
+                      justify-center
+                      w-full
+                      px-8
+                      py-3
+                      text-base
+                      font-medium
+                      text-white
+                      bg-indigo-600
+                      border border-transparent
+                      rounded-full
+                      hover:bg-indigo-700
+                      md:py-2 md:text-md md:px-10
+                      hover:shadow
+                    "
+                  >
+                    Checkout Now
+                  </button>
                 </div>
               </div>
             </div>
@@ -190,5 +235,5 @@ import FeatureList from '../components/authentication/FeatureList.vue';
         </div>
       </div>
     </div>
-    </main>
+  </main>
 </template>

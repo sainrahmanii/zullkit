@@ -1,10 +1,15 @@
 <script setup>
-import Gallery from '@/components/detail/Gallery.vue';
-import { RouterLink, useRoute } from 'vue-router';
-import { ref, onMounted, computed } from 'vue';
-import axios from 'axios';
+import Gallery from '@/components/detail/Gallery.vue'
+import { RouterLink, useRoute } from 'vue-router'
+import { ref, onMounted, computed } from 'vue'
+import axios from 'axios'
+import { useUserStore } from '@/stores/user'
 
 const route = useRoute()
+const userStore = useUserStore()
+
+const user = computed(() => userStore.getUser)
+const isLoggedIn = computed(() => userStore.isLoggedIn)
 const item = ref(false)
 
 async function getProduct() {
@@ -12,7 +17,7 @@ async function getProduct() {
     const response = await axios.get(
       "https://zullkit-backend.buildwithangga.id/api/products?id="+ route.params.id 
     );
-    item.value = response.data.data;
+    item.value = response.data.data
   } catch (error) {
     console.error(error)
   }
@@ -23,7 +28,8 @@ const features = computed(() => {
 })
 
 onMounted(() => {
-  getProduct();
+  userStore.fetchUser()
+  getProduct()
 })
 
 </script>
@@ -101,8 +107,8 @@ onMounted(() => {
                 </ul>
               </div>
 
-              <RouterLink
-                to="/pricing"
+              <a v-if="user.data.subscription > 0"
+                :href="item.file"
                 class="
                   inline-flex
                   items-center
@@ -122,6 +128,29 @@ onMounted(() => {
                 "
               >
                 Download Now
+              </a>
+              <RouterLink
+                v-else
+                to="/pricing"
+                class="
+                  inline-flex
+                  items-center
+                  justify-center
+                  w-full
+                  px-8
+                  py-3
+                  text-base
+                  font-medium
+                  text-white
+                  bg-indigo-600
+                  border border-transparent
+                  rounded-full
+                  hover:bg-indigo-700
+                  md:py-2 md:text-md md:px-10
+                  hover:shadow
+                "
+              >
+                Subscribe
               </RouterLink>
               
             </div>
